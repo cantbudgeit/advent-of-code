@@ -1,17 +1,17 @@
-use std::io::{self, Write};
+use std::io::{self};
 //use std::thread;
 //use std::time::Duration;
 
 use console::Term;
 use dialoguer::{theme::ColorfulTheme, Select};
 mod day_one;
-use crate::day_one::run as run_day_one;
+
 fn do_stuff() -> io::Result<()> {
     let term = Term::stdout();
     term.set_title("Advent of Code");
     term.write_line("Welcome to Ian's Advent of Code App")?;
 
-    let options = vec!["Day 1"];
+    let options = vec!["Day 1 Question 1", "Day 1 Question 2"];
     let choice = Select::with_theme(&ColorfulTheme::default())
         .items(&options)
         .clear(true)
@@ -19,7 +19,8 @@ fn do_stuff() -> io::Result<()> {
         .interact()?;
 
     match choice {
-        0 => run_day_one(),
+        0 => println!("{}", crate::day_one::run_question_1()),
+        1 => println!("{}", crate::day_one::run_question_2()),
         _ => eprint!("oops"),
     }
 
